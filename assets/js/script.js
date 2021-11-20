@@ -1,6 +1,12 @@
 var date = new Date();
 var hoursArray = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 var hourHolderEl = document.getElementById("hour-holder");
+//Decided to use LUXON instead of Moment due to Moment being legacy code
+var DateTime = luxon.DateTime;
+const now = DateTime.now();
+const currentHour = DateTime.local().hour;
+console.log(currentHour);
+$("#currentDay").text(now.toLocaleString())
 
 var tasks = {};
 
@@ -11,7 +17,9 @@ for (var i = 0; i < hoursArray.length; i++) {
     var newHourDivEl = document.createElement("div");
     var newTextAreaEl = document.createElement("textarea");
     var newButtonEl = document.createElement("button");
+
     
+
 
     //append elements
     hourHolderEl.append(newHourDivEl);
@@ -22,14 +30,17 @@ for (var i = 0; i < hoursArray.length; i++) {
     //assign id
     var newHourId = hoursArray[i].toString();
     newHourDivEl.id = newHourId;
-    newTextAreaEl.id ="textarea-" + i;
+    newTextAreaEl.id = "textarea-" + i;
 
     //assign classes
     newHourDivEl.className = "col-2 hour";
-    newTextAreaEl.className = "col-8";
-    newButtonEl.className = "col-2 saveBtn";
-    
-    console.log(newHourId);
+    newTextAreaEl.className = "col-8 description";
+    newButtonEl.className = "col-2 saveBtn far fa-save";
+
+    //console.log(newHourId);
+
+
+
 
     //check
     var hourEl = document.getElementById(newHourId);
@@ -40,20 +51,39 @@ for (var i = 0; i < hoursArray.length; i++) {
         hourEl.innerText = newHourId + " PM";
     }
 
+    //console.log(date)
+
+    if (currentHour > hoursArray[i]) {
+        newTextAreaEl.className = "col-8 past";
+    } else if (currentHour == hoursArray[i]) {
+        newTextAreaEl.className = "col-8 present";
+    } else {
+        newTextAreaEl.className = "col-8 future";
+    }
+
 
 }
 
+document.getElementById("textarea-0").placeholder = "Type in here..";
+document.getElementById("textarea-1").placeholder = "Type in here..";
+document.getElementById("textarea-2").placeholder = "Type in here..";
+document.getElementById("textarea-3").placeholder = "Type in here..";
+document.getElementById("textarea-4").placeholder = "Type in here..";
+document.getElementById("textarea-5").placeholder = "Type in here..";
+document.getElementById("textarea-6").placeholder = "Type in here..";
+document.getElementById("textarea-7").placeholder = "Type in here..";
+document.getElementById("textarea-8").placeholder = "Type in here..";
+document.getElementById("textarea-9").placeholder = "Type in here..";
 
-document.getElementById('currentDay').innerHTML = date;
+//time/date/other stuff
+//document.getElementById('currentDay').innerHTML = date;
 
 
-
-
-$(".row").on("click", "div", function () {
+$(".row").on("click", ".description", function () {
     var text = $(this).text().trim();
     // console.log(text)
 
-    var textInput = $("<textarea>").addClass("form-control").val(text);
+    var textInput = $("<textarea>").val(text);
 
     $(this).replaceWith(textInput);
 
@@ -80,18 +110,22 @@ $(".row").on("blur", "textarea", function () {
 
     //important for assignment 5 // may need to wrap this in an event function that if they click the save button then save to local storage/else do nothing
     // recreate p element
-    var taskP = $("<textarea>").addClass("col-8 future").text(text);
+    //var taskP = $("<textarea>").addClass("col-8").text(text);
     //var taskP = $("<p>").addClass("m-1").text(text);
 
     // replace textarea with p element
-    $(this).replaceWith(taskP);
+    //$(this).replaceWith(taskP);
 
 });
 
 
 //I need a click event on the button to save to local storage
 $(".saveBtn").click(function () {
-    alert("Handler for .click() called.");
+    // grab value from user and store in variable
+    //need to wrap all rows into a div and then $(this).siblings
+    var userInput = $(this).val()
+    console.log(userInput);
+    //localStorage.setItem()
 });
 
 
