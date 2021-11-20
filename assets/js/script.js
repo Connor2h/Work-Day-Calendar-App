@@ -48,5 +48,12 @@ $(".row").on("blur", "textarea", function() {
 });
 
 
+//I need a click event on the button to save to local storage
+$( ".saveBtn" ).click(function() {
+    alert( "Handler for .click() called." );
+});
+
+
+
 
 //console.log(date);
