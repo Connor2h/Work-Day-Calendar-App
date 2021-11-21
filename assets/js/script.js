@@ -1,11 +1,15 @@
 var date = new Date();
 var hoursArray = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 var hourHolderEl = document.getElementById("hour-holder");
+var buttonEl = document.getElementById(".saveBtn");
+var text;
+var userInput = [];
+
 //Decided to use LUXON instead of Moment due to Moment being legacy code
 var DateTime = luxon.DateTime;
 const now = DateTime.now();
 const currentHour = DateTime.local().hour;
-console.log(currentHour);
+//console.log(currentHour);
 $("#currentDay").text(now.toLocaleString())
 
 var tasks = {};
@@ -17,9 +21,6 @@ for (var i = 0; i < hoursArray.length; i++) {
     var newHourDivEl = document.createElement("div");
     var newTextAreaEl = document.createElement("textarea");
     var newButtonEl = document.createElement("button");
-
-    
-
 
     //append elements
     hourHolderEl.append(newHourDivEl);
@@ -64,6 +65,7 @@ for (var i = 0; i < hoursArray.length; i++) {
 
 }
 
+//setting placeholdertext for elements with the the id of textarea
 document.getElementById("textarea-0").placeholder = "Type in here..";
 document.getElementById("textarea-1").placeholder = "Type in here..";
 document.getElementById("textarea-2").placeholder = "Type in here..";
@@ -73,10 +75,6 @@ document.getElementById("textarea-5").placeholder = "Type in here..";
 document.getElementById("textarea-6").placeholder = "Type in here..";
 document.getElementById("textarea-7").placeholder = "Type in here..";
 document.getElementById("textarea-8").placeholder = "Type in here..";
-document.getElementById("textarea-9").placeholder = "Type in here..";
-
-//time/date/other stuff
-//document.getElementById('currentDay').innerHTML = date;
 
 
 $(".row").on("click", ".description", function () {
@@ -93,7 +91,7 @@ $(".row").on("click", ".description", function () {
 
 $(".row").on("blur", "textarea", function () {
     // get the textarea's current value/text
-    var text = $(this).val().trim();
+    text = $(this).val().trim();
 
     // get the parent ul's id attribute
     var status = $(this).closest(".div").attr("id");
@@ -104,31 +102,21 @@ $(".row").on("blur", "textarea", function () {
     var index = $(this).closest(".row").index();
     //var index = $(this).closest(".list-group-item").index();
 
-    //tasks[status][index].text = text; //access the task the global array and save text in it
-    //console.log(tasks[status][index].text)//this is important for assignment 5
-    //saveTasks();
+    console.log(text);
 
-    //important for assignment 5 // may need to wrap this in an event function that if they click the save button then save to local storage/else do nothing
-    // recreate p element
-    //var taskP = $("<textarea>").addClass("col-8").text(text);
-    //var taskP = $("<p>").addClass("m-1").text(text);
-
-    // replace textarea with p element
-    //$(this).replaceWith(taskP);
 
 });
-
 
 //I need a click event on the button to save to local storage
 $(".saveBtn").click(function () {
-    // grab value from user and store in variable
-    //need to wrap all rows into a div and then $(this).siblings
-    var userInput = $(this).val()
+
+    userInput = localStorage.getItem("userInput");
     console.log(userInput);
-    //localStorage.setItem()
+    userInput = text;
+    console.log(userInput);
+    //userInput = JSON.parse(localStorage.getItem("tasks"));
+
+    localStorage.setItem("userInput", JSON.stringify(userInput));
+
+
 });
-
-
-
-
-//console.log(date);
