@@ -20,6 +20,7 @@ var tasks = {};
 for (var i = 0; i < hoursArray.length; i++) {
     //create elements
     var newHourDivEl = document.createElement("div");
+    //var rowDivEl = document.createElement("div");
     var newTextAreaEl = document.createElement("textarea");
     var newButtonEl = document.createElement("button");
 
@@ -96,14 +97,103 @@ $(".row").on("blur", "textarea", function () {
 });
 
 //I need a click event on the button to save to local storage
-$(".saveBtn").click(function () {
+$("#btn-0").click(function () {
 
-    userInput = localStorage.getItem("userInput");
+    //save to a variable
+    var nineSave = $(this).siblings("#textarea-0").val();
 
-    userInput = text;
-
-    //userInput = JSON.parse(localStorage.getItem("tasks"));
-
-    localStorage.setItem("userInput", JSON.stringify(userInput));
+    //store local storage
+    localStorage.setItem("9am", nineSave);
 
 });
+
+$("#btn-1").click(function () {
+
+    //save to a variable
+    var tenSave = $(this).siblings("#textarea-1").val();
+
+    //store local storage
+    localStorage.setItem("10am", tenSave);
+
+});
+
+$("#btn-2").click(function () {
+
+    //save to a variable
+    var elevenSave = $(this).siblings("#textarea-2").val();
+
+    //store local storage
+    localStorage.setItem("11am", elevenSave);
+
+});
+
+$("#btn-3").click(function () {
+
+    //save to a variable
+    var twelveSave = $(this).siblings("#textarea-3").val();
+
+    //store local storage
+    localStorage.setItem("12pm", twelveSave);
+
+});
+
+$("#btn-4").click(function () {
+
+    //save to a variable
+    var oneSave = $(this).siblings("#textarea-4").val();
+
+    //store local storage
+    localStorage.setItem("13pm", oneSave);
+
+});
+
+$("#btn-5").click(function () {
+
+    //save to a variable
+    var twoSave = $(this).siblings("#textarea-5").val();
+
+    //store local storage
+    localStorage.setItem("14pm", twoSave);
+
+});
+
+$("#btn-6").click(function () {
+
+    //save to a variable
+    var threeSave = $(this).siblings("#textarea-6").val();
+
+    //store local storage
+    localStorage.setItem("15pm", threeSave);
+
+});
+
+$("#btn-7").click(function () {
+
+    //save to a variable
+    var fourSave = $(this).siblings("#textarea-7").val();
+
+    //store local storage
+    localStorage.setItem("16pm", fourSave);
+
+});
+
+$("#btn-8").click(function () {
+
+    //save to a variable
+    var fiveSave = $(this).siblings("#textarea-8").val();
+
+    //store local storage
+    localStorage.setItem("17pm", fiveSave);
+
+});
+
+//load the text back from local storage
+$("#hour-holder #textarea-0").val(localStorage.getItem("9am"));
+$("#hour-holder #textarea-1").val(localStorage.getItem("10am"));
+$("#hour-holder #textarea-2").val(localStorage.getItem("11am"));
+$("#hour-holder #textarea-3").val(localStorage.getItem("12pm"));
+$("#hour-holder #textarea-4").val(localStorage.getItem("13pm"));
+$("#hour-holder #textarea-5").val(localStorage.getItem("14pm"));
+$("#hour-holder #textarea-6").val(localStorage.getItem("15pm"));
+$("#hour-holder #textarea-7").val(localStorage.getItem("16pm"));
+$("#hour-holder #textarea-8").val(localStorage.getItem("17pm"));
