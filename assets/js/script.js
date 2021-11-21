@@ -1,3 +1,4 @@
+//variables
 var date = new Date();
 var hoursArray = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 var hourHolderEl = document.getElementById("hour-holder");
@@ -32,18 +33,15 @@ for (var i = 0; i < hoursArray.length; i++) {
     var newHourId = hoursArray[i].toString();
     newHourDivEl.id = newHourId;
     newTextAreaEl.id = "textarea-" + i;
+    newButtonEl.id = "btn-" + i; 
 
     //assign classes
     newHourDivEl.className = "col-2 hour";
     newTextAreaEl.className = "col-8 description";
     newButtonEl.className = "col-2 saveBtn far fa-save";
 
-    //console.log(newHourId);
 
-
-
-
-    //check
+    //check to assign hours to Am or PM
     var hourEl = document.getElementById(newHourId);
     if (hoursArray[i] < 12) {
 
@@ -54,6 +52,7 @@ for (var i = 0; i < hoursArray.length; i++) {
 
     //console.log(date)
 
+    //check if current hour is in past,present,future and assign class
     if (currentHour > hoursArray[i]) {
         newTextAreaEl.className = "col-8 past";
     } else if (currentHour == hoursArray[i]) {
@@ -61,7 +60,6 @@ for (var i = 0; i < hoursArray.length; i++) {
     } else {
         newTextAreaEl.className = "col-8 future";
     }
-
 
 }
 
@@ -77,6 +75,7 @@ document.getElementById("textarea-7").placeholder = "Type in here..";
 document.getElementById("textarea-8").placeholder = "Type in here..";
 
 
+//click on row and save text in text area
 $(".row").on("click", ".description", function () {
     var text = $(this).text().trim();
     // console.log(text)
@@ -89,21 +88,10 @@ $(".row").on("click", ".description", function () {
 
 })
 
+// click off row/blur save text to text area
 $(".row").on("blur", "textarea", function () {
     // get the textarea's current value/text
     text = $(this).val().trim();
-
-    // get the parent ul's id attribute
-    var status = $(this).closest(".div").attr("id");
-    //  var status = $(this).closest(".list-group").attr("id").replace("list-", "");
-    //console.log(status);
-
-    // get the task's position in the list of other li elements
-    var index = $(this).closest(".row").index();
-    //var index = $(this).closest(".list-group-item").index();
-
-    console.log(text);
-
 
 });
 
@@ -111,12 +99,11 @@ $(".row").on("blur", "textarea", function () {
 $(".saveBtn").click(function () {
 
     userInput = localStorage.getItem("userInput");
-    console.log(userInput);
+
     userInput = text;
-    console.log(userInput);
+
     //userInput = JSON.parse(localStorage.getItem("tasks"));
 
     localStorage.setItem("userInput", JSON.stringify(userInput));
-
 
 });
